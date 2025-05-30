@@ -2,54 +2,37 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acompanhar Denúncia</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 2em; }
-    .container { background: white; padding: 2em; border-radius: 10px; max-width: 600px; margin: auto; }
-    input, button { width: 100%; padding: 0.75em; margin-top: 1em; }
-    .resultado { margin-top: 2em; }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 2em; }
+    h2 { color: #006838; }
+    form { max-width: 400px; margin: auto; background: white; padding: 2em; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 1em; font-weight: bold; }
+    input[type="text"] { width: 100%; padding: 0.8em; margin-top: 0.3em; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 1.5em; padding: 0.8em 2em; background-color: #006838; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background-color: #004d2c; }
+    .back-link { text-align: center; margin-top: 2em; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Acompanhar Denúncia</h2>
-    <input type="text" id="protocolo" placeholder="Digite o número do protocolo" />
-    <button onclick="consultar()">Consultar</button>
-    <div class="resultado" id="resultado"></div>
+  <h2>Acompanhar Denúncia</h2>
+  <form id="acompanharForm">
+    <label for="protocolo">Digite seu protocolo:</label>
+    <input type="text" id="protocolo" required />
+    <button type="submit">Consultar</button>
+  </form>
+  <div class="back-link">
+    <a href="index.html">← Voltar para a Página Principal</a>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyC8RVKSDOmu6477Du27zYrm-QzAXaBqlf0",
-      authDomain: "racrsambiental-denuncias.firebaseapp.com",
-      databaseURL: "https://racrsambiental-denuncias-default-rtdb.firebaseio.com",
-      projectId: "racrsambiental-denuncias",
-      storageBucket: "racrsambiental-denuncias.appspot.com",
-      messagingSenderId: "162450672732",
-      appId: "1:162450672732:web:487a30fb39f1a756c22a99",
-      measurementId: "G-S7D6P3472F"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    window.consultar = async function () {
-      const protocolo = document.getElementById("protocolo").value;
-      const snapshot = await get(child(ref(db), "denuncias/" + protocolo));
-      const resultado = document.getElementById("resultado");
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        resultado.innerHTML = `<p><strong>Tipo:</strong> ${data.tipo}</p><p><strong>Descrição:</strong> ${data.descricao}</p>`;
-      } else {
-        resultado.innerHTML = "<p>Protocolo não encontrado.</p>";
-      }
-    };
+  <script>
+    document.getElementById('acompanharForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const protocolo = document.getElementById('protocolo').value;
+      alert("Consulta realizada. Nenhuma atualização encontrada para o protocolo: " + protocolo);
+    });
   </script>
 </body>
 </html>
