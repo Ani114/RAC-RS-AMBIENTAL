@@ -7,8 +7,8 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 2em;
-      background-color: #f5f5f5;
+      background: #f5f5f5;
+      padding: 2em;
       color: #333;
     }
     h1 {
@@ -16,10 +16,10 @@
       text-align: center;
     }
     form {
-      max-width: 600px;
+      max-width: 500px;
+      margin: auto;
       background: white;
       padding: 2em;
-      margin: auto;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
@@ -28,12 +28,13 @@
       margin-top: 1em;
       font-weight: bold;
     }
-    textarea, input[type="text"], input[type="email"] {
+    textarea, select, input[type="text"] {
       width: 100%;
       padding: 0.5em;
-      margin-top: 0.3em;
+      margin-top: 0.5em;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 1em;
       resize: vertical;
     }
     button {
@@ -49,10 +50,16 @@
     button:hover {
       background-color: #004d2c;
     }
-    .message {
-      text-align: center;
-      margin-top: 1em;
+    .mensagem {
+      max-width: 500px;
+      margin: 1em auto;
+      padding: 1em;
+      background: #e0ffe0;
+      border: 1px solid #006838;
+      border-radius: 4px;
+      color: #006838;
       font-weight: bold;
+      text-align: center;
     }
     nav {
       text-align: center;
@@ -72,25 +79,33 @@
   <a href="index.html">← Voltar à Página Principal</a>
 </nav>
 
-<h1>Formulário de Denúncia</h1>
+<h1>Formulário de Denúncia Anônima</h1>
 
 <form id="denunciaForm">
-  <label for="descricao">Descreva sua denúncia (obrigatório):</label>
-  <textarea id="descricao" name="descricao" rows="6" required></textarea>
+  <label for="categoria">Categoria da denúncia:</label>
+  <select id="categoria" name="categoria" required>
+    <option value="" disabled selected>Selecione a categoria</option>
+    <option value="Descarte irregular">Descarte irregular</option>
+    <option value="Poluição">Poluição</option>
+    <option value="Irregularidade ambiental">Irregularidade ambiental</option>
+    <option value="Outro">Outro</option>
+  </select>
 
-  <label for="contato">Seu contato (opcional):</label>
-  <input type="email" id="contato" name="contato" placeholder="Email para contato (se desejar)" />
+  <label for="descricao">Descrição da denúncia:</label>
+  <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva a situação..." required></textarea>
+
+  <label for="contato">Contato (opcional, para retorno):</label>
+  <input type="text" id="contato" name="contato" placeholder="Email ou telefone (opcional)" />
 
   <button type="submit">Enviar Denúncia</button>
 </form>
 
-<div class="message" id="responseMessage"></div>
+<div class="mensagem" id="mensagem" style="display:none;"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
 <script>
-  // Configuração Firebase (substitua pelos seus dados)
   const firebaseConfig = {
     apiKey: "AIzaSyC8RVKSDOmu6477Du27zYrm-QzAXaBqlf0",
     authDomain: "racrsambiental-denuncias.firebaseapp.com",
@@ -102,47 +117,56 @@
     measurementId: "G-S7D6P3472F"
   };
 
-  // Inicializa Firebase
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
 
   const form = document.getElementById('denunciaForm');
-  const responseMessage = document.getElementById('responseMessage');
+  const mensagemDiv = document.getElementById('mensagem');
 
-  form.addEventListener('submit', function(e) {
+  function gerarProtocolo() {
+    const prefixo = "DEN";
+    const timestamp = Date.now().toString();
+    const random = Math.floor(Math.random() * 9000 + 1000).toString();
+    return prefixo + timestamp + random;
+  }
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    const categoria = form.categoria.value.trim();
     const descricao = form.descricao.value.trim();
     const contato = form.contato.value.trim();
 
-    if (!descricao) {
-      responseMessage.style.color = 'red';
-      responseMessage.textContent = 'Por favor, descreva a denúncia.';
+    if (!categoria || !descricao) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
 
-    // Gerar protocolo simples e único (timestamp + random)
-    const protocolo = 'DEN' + Date.now() + Math.floor(Math.random() * 1000);
+    const protocolo = gerarProtocolo();
+    const data = Date.now();
 
-    // Dados a salvar
-    const novaDenuncia = {
-      descricao: descricao,
-      contato: contato || 'Anônimo',
-      protocolo: protocolo,
-      data: new Date().toISOString(),
-      status: 'Registrada'
+    const denuncia = {
+      protocolo,
+      categoria,
+      descricao,
+      status: "Recebida",
+      data,
+      contato: contato || null
     };
 
-    // Salvar no Firebase
-    database.ref('denuncias/' + protocolo).set(novaDenuncia)
+    database.ref('denuncias/' + protocolo).set(denuncia)
       .then(() => {
-        responseMessage.style.color = 'green';
-        responseMessage.innerHTML = `Denúncia enviada com sucesso!<br>Protocolo: <strong>${protocolo}</strong><br>Guarde este número para acompanhar sua denúncia.`;
+        mensagemDiv.style.display = 'block';
+        mensagemDiv.style.color = '#006838';
+        mensagemDiv.textContent = `Denúncia enviada com sucesso! Seu protocolo é: ${protocolo}. Use este código para acompanhar sua denúncia.`;
         form.reset();
+        alert("Denúncia enviada com sucesso!\nProtocolo: " + protocolo);
       })
       .catch((error) => {
-        responseMessage.style.color = 'red';
-        responseMessage.textContent = 'Erro ao enviar a denúncia: ' + error.message;
+        mensagemDiv.style.display = 'block';
+        mensagemDiv.style.color = 'red';
+        mensagemDiv.textContent = 'Erro ao enviar a denúncia. Por favor, tente novamente mais tarde.';
+        console.error(error);
       });
   });
 </script>
