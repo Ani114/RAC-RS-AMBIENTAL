@@ -1,5 +1,75 @@
-<!-- Seção Home -->
-<section id="homeSection">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAC RS Ambiental LTDA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-color: #006838;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    nav {
+      background-color: #004d2c;
+      text-align: center;
+      padding: 1em;
+    }
+    nav button {
+      background-color: #fff;
+      color: #006838;
+      border: none;
+      margin: 0 1em;
+      padding: 0.5em 1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    section {
+      padding: 2em;
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    form input, form textarea {
+      width: 100%;
+      margin-bottom: 1em;
+      padding: 0.5em;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      background-color: #006838;
+      color: white;
+      padding: 0.7em 1.5em;
+      border: none;
+      cursor: pointer;
+    }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>RAC RS Ambiental LTDA</h1>
+</header>
+
+<nav>
+  <button onclick="showSection('home')">Início</button>
+  <button onclick="showSection('denuncia')">Registrar Denúncia</button>
+  <button onclick="showSection('acompanhar')">Acompanhar Denúncia</button>
+</nav>
+
+<section id="home" class="active">
   <h2>Quem Somos</h2>
   <p>
     A <strong>RAC RS Ambiental LTDA</strong> é uma empresa especializada na coleta, transporte e gestão de resíduos, comprometida com a sustentabilidade e o cuidado com o meio ambiente.
@@ -31,10 +101,6 @@
   </ul>
 
   <h3>Política SGI (Sistema de Gestão Integrado)</h3>
-  <p>
-    A RAC RS Ambiental atua com responsabilidade na coleta, transporte e destinação de resíduos, oferecendo soluções sustentáveis que respeitam o meio ambiente
-    e promovem a qualidade, a segurança e a melhoria contínua de seus processos, com foco na satisfação de clientes, colaboradores e da sociedade.
-  </p>
   <ul>
     <li>✅ Gestão eficiente dos resíduos coletados, com foco na redução de impactos ambientais.</li>
     <li>✅ Adoção de tecnologias seguras e eficazes, visando o aprimoramento contínuo do SGI.</li>
@@ -47,13 +113,95 @@
   <h3>Contato</h3>
   <p><strong>Endereço:</strong> Est. Cristiano Silveira Gomes, 2192<br />
   Bairro: Rincão do Capim, Santo Antônio da Patrulha - RS</p>
-
   <p><strong>Fale Conosco:</strong><br />
   📞 (51) 98145-0498<br />
   📞 (47) 99291-6372<br />
   📧 <a href="mailto:ani.rhracrs@gmail.com">ani.rhracrs@gmail.com</a></p>
-
   <p><strong>Redes Sociais:</strong><br />
   Instagram: <a href="https://instagram.com/racrsambiental" target="_blank">@racrsambiental</a><br />
   LinkedIn: <em>em breve</em></p>
 </section>
+
+<section id="denuncia">
+  <h2>Registrar Denúncia</h2>
+  <form id="formDenuncia">
+    <textarea name="descricao" placeholder="Descreva a denúncia" required></textarea>
+    <input type="text" name="contato" placeholder="Informar contato (opcional)">
+    <button type="submit">Enviar Denúncia</button>
+  </form>
+  <p id="mensagemEnvio"></p>
+</section>
+
+<section id="acompanhar">
+  <h2>Acompanhar Denúncia</h2>
+  <form id="formAcompanhar">
+    <input type="text" id="protocolo" placeholder="Digite o número do protocolo" required />
+    <button type="submit">Consultar</button>
+  </form>
+  <p id="mensagemAcompanhar"></p>
+  <div id="resultadoAcompanhar"></div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyC8RVKSDOmu6477Du27zYrm-QzAXaBqlf0",
+    authDomain: "racrsambiental-denuncias.firebaseapp.com",
+    databaseURL: "https://racrsambiental-denuncias-default-rtdb.firebaseio.com",
+    projectId: "racrsambiental-denuncias",
+    storageBucket: "racrsambiental-denuncias.appspot.com",
+    messagingSenderId: "162450672732",
+    appId: "1:162450672732:web:487a30fb39f1a756c22a99"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  document.getElementById('formDenuncia').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const descricao = this.descricao.value.trim();
+    const contato = this.contato.value.trim();
+    if (!descricao) return;
+    const protocolo = 'DEN' + Date.now();
+    db.ref('denuncias/' + protocolo).set({
+      protocolo,
+      descricao,
+      contato,
+      status: 'Recebida',
+      resposta: '',
+      data: Date.now()
+    });
+    document.getElementById('mensagemEnvio').textContent = `Denúncia registrada com sucesso! Protocolo: ${protocolo}`;
+    this.reset();
+  });
+
+  document.getElementById('formAcompanhar').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const protocolo = document.getElementById('protocolo').value.trim();
+    if (!protocolo) return;
+    db.ref('denuncias/' + protocolo).get().then((snap) => {
+      if (snap.exists()) {
+        const dados = snap.val();
+        document.getElementById('mensagemAcompanhar').textContent = '';
+        document.getElementById('resultadoAcompanhar').innerHTML = `
+          <strong>Protocolo:</strong> ${dados.protocolo} <br>
+          <strong>Descrição:</strong> ${dados.descricao} <br>
+          <strong>Status:</strong> ${dados.status} <br>
+          <strong>Resposta:</strong> ${dados.resposta ? dados.resposta : 'Ainda sem resposta'} <br>
+          <strong>Data:</strong> ${new Date(dados.data).toLocaleString()} <br>
+          <strong>Contato:</strong> ${dados.contato ? dados.contato : 'Não informado'}`;
+      } else {
+        document.getElementById('mensagemAcompanhar').textContent = 'Protocolo não encontrado.';
+        document.getElementById('resultadoAcompanhar').innerHTML = '';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
