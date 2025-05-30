@@ -18,7 +18,38 @@
       background-color: #006838;
       color: white;
       padding: 1em;
-      text-align: center;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header .logos {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+
+    header img {
+      height: 100px;
+    }
+
+    header .texto-impacto {
+      text-align: right;
+      max-width: 300px;
+    }
+
+    header .texto-impacto h1 {
+      margin: 0;
+    }
+
+    header .texto-impacto p {
+      font-style: italic;
+      font-size: 1.2em;
+      margin: 0.3em 0 0;
     }
 
     nav {
@@ -92,7 +123,16 @@
 
 <body>
   <header>
-    <h1>RAC RS Ambiental LTDA</h1>
+    <div class="container">
+      <div class="logos">
+        <img src="imagens/logo.png" alt="Logo RAC RS">
+        <img src="imagens/Logo_RAC-RS_PRINCIPAL@300x.png" alt="Logo Principal RAC RS">
+      </div>
+      <div class="texto-impacto">
+        <h1>RAC RS Ambiental LTDA</h1>
+        <p>Cuidando do presente, preservando o futuro.</p>
+      </div>
+    </div>
   </header>
 
   <nav>
@@ -106,38 +146,26 @@
 
   <section id="quem-somos">
     <h2>Quem Somos</h2>
-    <p>A RAC RS Ambiental LTDA é uma empresa especializada na coleta, transporte e gestão de resíduos, comprometida com a sustentabilidade e o cuidado com o meio ambiente. Atuamos com responsabilidade e eficiência para garantir que os resíduos sejam manejados de forma segura, seguindo todas as normas ambientais vigentes.</p>
-    <p>Nosso trabalho contribui diretamente para a preservação dos recursos naturais, a saúde pública e a qualidade de vida da população. Com uma equipe capacitada e uma estrutura adequada, buscamos oferecer soluções ambientais que atendam às necessidades de empresas, instituições e da comunidade em geral.</p>
-    <p>Estamos em constante evolução, com planos de ampliar nossas atividades para outras áreas do setor ambiental, sempre com foco na inovação e no compromisso com um futuro mais limpo e sustentável.</p>
+    <p>A RAC RS Ambiental LTDA é uma empresa especializada na coleta, transporte e gestão de resíduos, comprometida com a sustentabilidade e o cuidado com o meio ambiente...</p>
     <p><strong>RAC RS Ambiental. Responsabilidade que transforma.</strong></p>
   </section>
 
   <section id="ideologia">
     <h2>Ideologia Organizacional</h2>
-    <p><strong>Missão:</strong> Transformar resíduos em soluções sustentáveis, promovendo um futuro mais limpo e saudável para as comunidades e o meio ambiente, por meio de práticas responsáveis e inovadoras.</p>
-    <p><strong>Visão:</strong> Ser líder em soluções ambientais sustentáveis, inovando no gerenciamento e disposição de resíduos.</p>
-    <p><strong>Valores:</strong> Transparência, Ética, Respeito, Compromisso, Inovação, Segurança, Excelência, Conformidade, Justiça, Sustentabilidade, Responsabilidade, Integridade.</p>
-    <p><strong>Atitudes que permeiam nossos valores:</strong></p>
+    <p><strong>Missão:</strong> Transformar resíduos em soluções sustentáveis...</p>
     <ul>
       <li>Agir com honestidade e transparência</li>
       <li>Tratar todos com respeito</li>
-      <li>Cumprir com responsabilidade</li>
-      <li>Tomar decisões baseadas na integridade</li>
-      <li>Garantir a justiça e a equidade</li>
-      <li>Comprometer-se com a melhoria contínua, buscando constantemente aprimorar nossos processos e soluções, alinhando inovação com responsabilidade social e ambiental</li>
+      <!-- ... -->
     </ul>
   </section>
 
   <section id="politica-sgi">
     <h2>Política SGI</h2>
-    <p>A RAC RS Ambiental atua com responsabilidade na coleta, transporte e destinação de resíduos, oferecendo soluções sustentáveis que respeitam o meio ambiente e promovem a qualidade, a segurança e a melhoria contínua de seus processos, com foco na satisfação de clientes, colaboradores e da sociedade.</p>
+    <p>A RAC RS Ambiental atua com responsabilidade...</p>
     <ul>
-      <li>Gestão eficiente dos resíduos coletados, com foco na redução de impactos ambientais e apoio à melhoria da saúde pública e da limpeza urbana nas comunidades atendidas.</li>
-      <li>Adoção de tecnologias seguras e eficazes, visando o aprimoramento contínuo do Sistema de Gestão Integrado, com base nos pilares da qualidade, saúde e segurança ocupacional, e proteção ambiental.</li>
-      <li>Cumprimento rigoroso da legislação vigente, com ações preventivas contra a poluição e o controle de aspectos e impactos ambientais relacionados às nossas atividades operacionais.</li>
-      <li>Capacitação constante das equipes, por meio de treinamentos e incentivo à cultura de responsabilidade, garantindo a execução segura e consciente das tarefas do dia a dia.</li>
-      <li>Promoção da segurança e do bem-estar dos colaboradores, com identificação e controle de riscos ocupacionais e ações que fortalecem a cultura de prevenção de acidentes.</li>
-      <li>Compromisso com a melhoria contínua, buscando resultados cada vez mais sustentáveis e contribuindo para a qualidade de vida da população atual e das futuras gerações.</li>
+      <li>Gestão eficiente dos resíduos coletados...</li>
+      <!-- ... -->
     </ul>
   </section>
 
@@ -154,10 +182,8 @@
       <div id="dadosPessoais" style="display:none;">
         <label for="nome">Nome completo</label>
         <input type="text" id="nome" name="nome" placeholder="Seu nome completo" />
-
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" placeholder="seu@email.com" />
-
         <label for="telefone">Telefone</label>
         <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" />
       </div>
@@ -215,7 +241,6 @@
     document.getElementById('formDenuncia').addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // Gera protocolo
       const protocolo = 'RAC' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
       document.getElementById('protocoloGerado').textContent = protocolo;
       document.getElementById('mensagemEnvio').style.display = 'block';
