@@ -15,10 +15,20 @@
     }
 
     header {
-      background-color: #006838;
+      background-image: url('banner.jpeg1');
+      background-size: cover;
+      background-position: center;
       color: white;
-      padding: 1em;
+      padding: 3em 1em;
       text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      padding: 0.5em 1em;
+      border-radius: 8px;
     }
 
     nav {
@@ -38,13 +48,14 @@
       padding: 2em;
       max-width: 900px;
       margin: auto;
+      background-color: white;
+      border-radius: 8px;
+      margin-top: 2em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     form {
-      background: white;
-      padding: 2em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 2em 0 0 0;
     }
 
     label {
@@ -104,139 +115,8 @@
     <a href="#contato">Contato</a>
   </nav>
 
-  <section id="quem-somos">
-    <h2>Quem Somos</h2>
-    <p>A RAC RS Ambiental LTDA é uma empresa especializada na coleta, transporte e gestão de resíduos, comprometida com a sustentabilidade e o cuidado com o meio ambiente. Atuamos com responsabilidade e eficiência para garantir que os resíduos sejam manejados de forma segura, seguindo todas as normas ambientais vigentes.</p>
-    <p>Nosso trabalho contribui diretamente para a preservação dos recursos naturais, a saúde pública e a qualidade de vida da população. Com uma equipe capacitada e uma estrutura adequada, buscamos oferecer soluções ambientais que atendam às necessidades de empresas, instituições e da comunidade em geral.</p>
-    <p>Estamos em constante evolução, com planos de ampliar nossas atividades para outras áreas do setor ambiental, sempre com foco na inovação e no compromisso com um futuro mais limpo e sustentável.</p>
-    <p><strong>RAC RS Ambiental. Responsabilidade que transforma.</strong></p>
-  </section>
-
-  <section id="ideologia">
-    <h2>Ideologia Organizacional</h2>
-    <p><strong>Missão:</strong> Transformar resíduos em soluções sustentáveis, promovendo um futuro mais limpo e saudável para as comunidades e o meio ambiente, por meio de práticas responsáveis e inovadoras.</p>
-    <p><strong>Visão:</strong> Ser líder em soluções ambientais sustentáveis, inovando no gerenciamento e disposição de resíduos.</p>
-    <p><strong>Valores:</strong> Transparência, Ética, Respeito, Compromisso, Inovação, Segurança, Excelência, Conformidade, Justiça, Sustentabilidade, Responsabilidade, Integridade.</p>
-    <p><strong>Atitudes que permeiam nossos valores:</strong></p>
-    <ul>
-      <li>Agir com honestidade e transparência</li>
-      <li>Tratar todos com respeito</li>
-      <li>Cumprir com responsabilidade</li>
-      <li>Tomar decisões baseadas na integridade</li>
-      <li>Garantir a justiça e a equidade</li>
-      <li>Comprometer-se com a melhoria contínua, buscando constantemente aprimorar nossos processos e soluções, alinhando inovação com responsabilidade social e ambiental</li>
-    </ul>
-  </section>
-
-  <section id="politica-sgi">
-    <h2>Política SGI</h2>
-    <p>A RAC RS Ambiental atua com responsabilidade na coleta, transporte e destinação de resíduos, oferecendo soluções sustentáveis que respeitam o meio ambiente e promovem a qualidade, a segurança e a melhoria contínua de seus processos, com foco na satisfação de clientes, colaboradores e da sociedade.</p>
-    <ul>
-      <li>Gestão eficiente dos resíduos coletados, com foco na redução de impactos ambientais e apoio à melhoria da saúde pública e da limpeza urbana nas comunidades atendidas.</li>
-      <li>Adoção de tecnologias seguras e eficazes, visando o aprimoramento contínuo do Sistema de Gestão Integrado, com base nos pilares da qualidade, saúde e segurança ocupacional, e proteção ambiental.</li>
-      <li>Cumprimento rigoroso da legislação vigente, com ações preventivas contra a poluição e o controle de aspectos e impactos ambientais relacionados às nossas atividades operacionais.</li>
-      <li>Capacitação constante das equipes, por meio de treinamentos e incentivo à cultura de responsabilidade, garantindo a execução segura e consciente das tarefas do dia a dia.</li>
-      <li>Promoção da segurança e do bem-estar dos colaboradores, com identificação e controle de riscos ocupacionais e ações que fortalecem a cultura de prevenção de acidentes.</li>
-      <li>Compromisso com a melhoria contínua, buscando resultados cada vez mais sustentáveis e contribuindo para a qualidade de vida da população atual e das futuras gerações.</li>
-    </ul>
-  </section>
-
-  <section id="formulario">
-    <h2>Formulário de Denúncia</h2>
-    <form id="formDenuncia">
-      <label>Deseja se identificar?</label>
-      <select id="anonimo" name="anonimo" required>
-        <option value="">Selecione</option>
-        <option value="sim">Sim, quero ser anônimo</option>
-        <option value="nao">Não, desejo informar meus dados</option>
-      </select>
-
-      <div id="dadosPessoais" style="display:none;">
-        <label for="nome">Nome completo</label>
-        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" />
-
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="seu@email.com" />
-
-        <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" />
-      </div>
-
-      <label for="tipoDenuncia">Tipo de denúncia</label>
-      <select id="tipoDenuncia" name="tipoDenuncia" required>
-        <option value="">Selecione</option>
-        <option value="ambiental">Ambiental</option>
-        <option value="seguranca">Segurança</option>
-        <option value="conduta">Conduta</option>
-        <option value="outros">Outros</option>
-      </select>
-
-      <label for="descricao">Descrição da denúncia</label>
-      <textarea id="descricao" name="descricao" rows="5" required placeholder="Descreva os fatos detalhadamente"></textarea>
-
-      <button type="submit">Enviar Denúncia</button>
-    </form>
-
-    <div id="mensagemEnvio" class="mensagem" style="display:none;">
-      <p>Denúncia enviada com sucesso! Seu protocolo é: <strong><span id="protocoloGerado"></span></strong></p>
-      <p>Guarde este número para acompanhar o andamento.</p>
-    </div>
-  </section>
-
-  <section id="acompanhamento">
-    <h2>Acompanhar Denúncia</h2>
-    <form id="formAcompanhamento">
-      <label for="protocoloConsulta">Digite o número do protocolo</label>
-      <input type="text" id="protocoloConsulta" name="protocoloConsulta" placeholder="Ex: RAC123456" required />
-      <button type="submit">Consultar</button>
-    </form>
-
-    <div id="resultadoConsulta" class="resultado" style="display:none;">
-      <p><strong>Status da denúncia:</strong> Em análise</p>
-      <p>Seu protocolo foi recebido e está sendo avaliado pela equipe responsável. Caso necessário, entraremos em contato.</p>
-    </div>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <p><strong>Endereço:</strong><br>Est. Cristiano Silveira Gomes, 2192<br>Bairro: Rincão do Capim<br>Santo Antônio da Patrulha - RS</p>
-    <p><strong>Telefone:</strong><br>(51) 98145-0498<br>(47) 99291-6372</p>
-    <p><strong>Email:</strong><br>ani.rhracrs@gmail.com</p>
-    <p><strong>Instagram:</strong> @racrsambiental</p>
-    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/racrsambiental" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/racrsambiental</a></p>
-  </section>
-
-  <script>
-    document.getElementById('anonimo').addEventListener('change', function () {
-      const dados = document.getElementById('dadosPessoais');
-      dados.style.display = this.value === 'nao' ? 'block' : 'none';
-    });
-
-    document.getElementById('formDenuncia').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      // Gera protocolo
-      const protocolo = 'RAC' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-      document.getElementById('protocoloGerado').textContent = protocolo;
-      document.getElementById('mensagemEnvio').style.display = 'block';
-
-      this.reset();
-      document.getElementById('dadosPessoais').style.display = 'none';
-    });
-
-    document.getElementById('formAcompanhamento').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const protocolo = document.getElementById('protocoloConsulta').value.trim();
-
-      if (!protocolo.startsWith('RAC')) {
-        alert('Número de protocolo inválido. Deve começar com "RAC".');
-        return;
-      }
-
-      document.getElementById('resultadoConsulta').style.display = 'block';
-    });
-  </script>
+  <!-- Mantenha as demais seções e scripts conforme já estão no seu HTML -->
 </body>
 
 </html>
+
