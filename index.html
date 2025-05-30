@@ -1,207 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAC RS Ambiental LTDA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canal de Denúncias - RAC RS Ambiental LTDA</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
       background-color: #f5f5f5;
       color: #333;
     }
+
     header {
       background-color: #006838;
       color: white;
       padding: 1em;
       text-align: center;
     }
+
     nav {
-      background-color: #004d2c;
       text-align: center;
-      padding: 1em;
+      background-color: #004d2c;
+      padding: 0.5em;
     }
-    nav button {
-      background-color: #fff;
-      color: #006838;
-      border: none;
+
+    nav a {
+      color: white;
       margin: 0 1em;
-      padding: 0.5em 1em;
+      text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
     }
+
     section {
       padding: 2em;
-      display: none;
+      max-width: 900px;
+      margin: auto;
     }
-    section.active {
+
+    form {
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
       display: block;
+      margin-top: 1em;
+      font-weight: bold;
     }
-    form input, form textarea {
+
+    input,
+    select,
+    textarea {
       width: 100%;
-      margin-bottom: 1em;
-      padding: 0.5em;
+      padding: 0.75em;
+      margin-top: 0.5em;
       border-radius: 4px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
     }
-    form button {
+
+    button {
+      margin-top: 1.5em;
       background-color: #006838;
       color: white;
-      padding: 0.7em 1.5em;
+      padding: 1em 2em;
       border: none;
+      border-radius: 4px;
+      font-size: 1em;
       cursor: pointer;
     }
-    .success { color: green; }
-    .error { color: red; }
+
+    button:hover {
+      background-color: #004d2c;
+    }
+
+    .mensagem,
+    .resultado {
+      background: white;
+      border-radius: 8px;
+      padding: 1em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 1.5em;
+    }
   </style>
 </head>
+
 <body>
+  <header>
+    <h1>Canal de Denúncias - RAC RS Ambiental LTDA</h1>
+  </header>
 
-<header>
-  <h1>RAC RS Ambiental LTDA</h1>
-</header>
+  <nav>
+    <a href="#formulario">Formulário de Denúncia</a>
+    <a href="#acompanhamento">Acompanhar Denúncia</a>
+  </nav>
 
-<nav>
-  <button onclick="showSection('home')">Início</button>
-  <button onclick="showSection('denuncia')">Registrar Denúncia</button>
-  <button onclick="showSection('acompanhar')">Acompanhar Denúncia</button>
-</nav>
+  <section id="formulario">
+    <h2>Formulário de Denúncia</h2>
+    <form id="formDenuncia">
+      <label for="tipo">Tipo de Denúncia</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">Selecione</option>
+        <option value="assédio">Assédio</option>
+        <option value="discriminação">Discriminação</option>
+        <option value="conduta">Má conduta</option>
+        <option value="outro">Outro</option>
+      </select>
 
-<section id="home" class="active">
-  <h2>Quem Somos</h2>
-  <p>
-    A <strong>RAC RS Ambiental LTDA</strong> é uma empresa especializada na coleta, transporte e gestão de resíduos, comprometida com a sustentabilidade e o cuidado com o meio ambiente.
-    Atuamos com responsabilidade e eficiência para garantir que os resíduos sejam manejados de forma segura, seguindo todas as normas ambientais vigentes.
-  </p>
-  <p>
-    Nosso trabalho contribui diretamente para a preservação dos recursos naturais, a saúde pública e a qualidade de vida da população. Com uma equipe capacitada e uma estrutura adequada,
-    buscamos oferecer soluções ambientais que atendam às necessidades de empresas, instituições e da comunidade em geral.
-  </p>
-  <p>
-    Estamos em constante evolução, com planos de ampliar nossas atividades para outras áreas do setor ambiental, sempre com foco na inovação e no compromisso com um futuro mais limpo e sustentável.
-  </p>
-  <p><strong>RAC RS Ambiental. Responsabilidade que transforma.</strong></p>
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" rows="6" required></textarea>
 
-  <h3>Ideologia Organizacional</h3>
-  <p><strong>Missão:</strong> Transformar resíduos em soluções sustentáveis, promovendo um futuro mais limpo e saudável para as comunidades e o meio ambiente, por meio de práticas responsáveis e inovadoras.</p>
-  <p><strong>Visão:</strong> Ser líder em soluções ambientais sustentáveis, inovando no gerenciamento e disposição de resíduos.</p>
-  <p><strong>Valores:</strong> Transparência, Ética, Respeito, Compromisso, Inovação, Segurança, Excelência, Conformidade, Justiça, Sustentabilidade, Responsabilidade, Integridade.</p>
+      <label for="anonimo">Deseja manter o anonimato?</label>
+      <select id="anonimo" name="anonimo" required>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+      </select>
 
-  <h4>Atitudes que Permeiam Nossos Valores</h4>
-  <ul>
-    <li>Agir com honestidade e transparência</li>
-    <li>Tratar todos com respeito</li>
-    <li>Cumprir com responsabilidade</li>
-    <li>Tomar decisões baseadas na integridade</li>
-    <li>Garantir a justiça e a equidade</li>
-    <li>Comprometer-se com a melhoria contínua</li>
-    <li>Alinhar inovação com responsabilidade social e ambiental</li>
-  </ul>
+      <div id="dadosPessoais" style="display:none;">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" />
 
-  <h3>Política SGI (Sistema de Gestão Integrado)</h3>
-  <ul>
-    <li>✅ Gestão eficiente dos resíduos coletados, com foco na redução de impactos ambientais.</li>
-    <li>✅ Adoção de tecnologias seguras e eficazes, visando o aprimoramento contínuo do SGI.</li>
-    <li>✅ Cumprimento rigoroso da legislação vigente e ações preventivas contra a poluição.</li>
-    <li>✅ Capacitação constante das equipes, com treinamentos e incentivo à cultura de responsabilidade.</li>
-    <li>✅ Promoção da segurança e do bem-estar dos colaboradores, com controle de riscos ocupacionais.</li>
-    <li>✅ Compromisso com a melhoria contínua e com resultados sustentáveis.</li>
-  </ul>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+      </div>
 
-  <h3>Contato</h3>
-  <p><strong>Endereço:</strong> Est. Cristiano Silveira Gomes, 2192<br />
-  Bairro: Rincão do Capim, Santo Antônio da Patrulha - RS</p>
-  <p><strong>Fale Conosco:</strong><br />
-  📞 (51) 98145-0498<br />
-  📞 (47) 99291-6372<br />
-  📧 <a href="mailto:ani.rhracrs@gmail.com">ani.rhracrs@gmail.com</a></p>
-  <p><strong>Redes Sociais:</strong><br />
-  Instagram: <a href="https://instagram.com/racrsambiental" target="_blank">@racrsambiental</a><br />
-  LinkedIn: <em>em breve</em></p>
-</section>
+      <button type="submit">Enviar Denúncia</button>
+    </form>
 
-<section id="denuncia">
-  <h2>Registrar Denúncia</h2>
-  <form id="formDenuncia">
-    <textarea name="descricao" placeholder="Descreva a denúncia" required></textarea>
-    <input type="text" name="contato" placeholder="Informar contato (opcional)">
-    <button type="submit">Enviar Denúncia</button>
-  </form>
-  <p id="mensagemEnvio"></p>
-</section>
+    <div class="mensagem" id="mensagemEnvio" style="display:none;">
+      Denúncia enviada com sucesso! Anote o número de protocolo: <strong id="protocoloGerado"></strong>
+    </div>
+  </section>
 
-<section id="acompanhar">
-  <h2>Acompanhar Denúncia</h2>
-  <form id="formAcompanhar">
-    <input type="text" id="protocolo" placeholder="Digite o número do protocolo" required />
-    <button type="submit">Consultar</button>
-  </form>
-  <p id="mensagemAcompanhar"></p>
-  <div id="resultadoAcompanhar"></div>
-</section>
+  <section id="acompanhamento">
+    <h2>Acompanhar Denúncia</h2>
+    <form id="formAcompanhamento">
+      <label for="protocolo">Número do Protocolo</label>
+      <input type="text" id="protocolo" name="protocolo" required />
+      <button type="submit">Consultar</button>
+    </form>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyC8RVKSDOmu6477Du27zYrm-QzAXaBqlf0",
-    authDomain: "racrsambiental-denuncias.firebaseapp.com",
-    databaseURL: "https://racrsambiental-denuncias-default-rtdb.firebaseio.com",
-    projectId: "racrsambiental-denuncias",
-    storageBucket: "racrsambiental-denuncias.appspot.com",
-    messagingSenderId: "162450672732",
-    appId: "1:162450672732:web:487a30fb39f1a756c22a99"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+    <div class="resultado" id="resultadoConsulta" style="display:none;">
+      Status: Em análise<br />
+      Observações: Sua denúncia está sendo avaliada por nossa equipe.
+    </div>
+  </section>
 
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  document.getElementById('formDenuncia').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const descricao = this.descricao.value.trim();
-    const contato = this.contato.value.trim();
-    if (!descricao) return;
-    const protocolo = 'DEN' + Date.now();
-    db.ref('denuncias/' + protocolo).set({
-      protocolo,
-      descricao,
-      contato,
-      status: 'Recebida',
-      resposta: '',
-      data: Date.now()
+  <script>
+    document.getElementById('anonimo').addEventListener('change', function () {
+      const dados = document.getElementById('dadosPessoais');
+      dados.style.display = this.value === 'nao' ? 'block' : 'none';
     });
-    document.getElementById('mensagemEnvio').textContent = `Denúncia registrada com sucesso! Protocolo: ${protocolo}`;
-    this.reset();
-  });
 
-  document.getElementById('formAcompanhar').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const protocolo = document.getElementById('protocolo').value.trim();
-    if (!protocolo) return;
-    db.ref('denuncias/' + protocolo).get().then((snap) => {
-      if (snap.exists()) {
-        const dados = snap.val();
-        document.getElementById('mensagemAcompanhar').textContent = '';
-        document.getElementById('resultadoAcompanhar').innerHTML = `
-          <strong>Protocolo:</strong> ${dados.protocolo} <br>
-          <strong>Descrição:</strong> ${dados.descricao} <br>
-          <strong>Status:</strong> ${dados.status} <br>
-          <strong>Resposta:</strong> ${dados.resposta ? dados.resposta : 'Ainda sem resposta'} <br>
-          <strong>Data:</strong> ${new Date(dados.data).toLocaleString()} <br>
-          <strong>Contato:</strong> ${dados.contato ? dados.contato : 'Não informado'}`;
-      } else {
-        document.getElementById('mensagemAcompanhar').textContent = 'Protocolo não encontrado.';
-        document.getElementById('resultadoAcompanhar').innerHTML = '';
-      }
+    document.getElementById('formDenuncia').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const protocolo = 'RAC' + Math.floor(Math.random() * 1000000);
+      document.getElementById('protocoloGerado').textContent = protocolo;
+      document.getElementById('mensagemEnvio').style.display = 'block';
+      this.reset();
+      document.getElementById('dadosPessoais').style.display = 'none';
     });
-  });
-</script>
 
+    document.getElementById('formAcompanhamento').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('resultadoConsulta').style.display = 'block';
+    });
+  </script>
 </body>
+
 </html>
