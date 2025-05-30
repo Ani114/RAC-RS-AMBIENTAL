@@ -1,66 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulário de Denúncia</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 2em; }
-    form { background: white; padding: 2em; border-radius: 10px; max-width: 600px; margin: auto; }
-    label { display: block; margin-top: 1em; }
-    input, select, textarea { width: 100%; padding: 0.5em; margin-top: 0.5em; }
-    button { margin-top: 1em; padding: 0.75em 1.5em; background: #006838; color: white; border: none; cursor: pointer; }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 2em; }
+    h2 { color: #006838; }
+    form { max-width: 600px; margin: auto; background: white; padding: 2em; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 1em; font-weight: bold; }
+    textarea, select, input[type="text"] { width: 100%; padding: 0.8em; margin-top: 0.3em; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 1.5em; padding: 0.8em 2em; background-color: #006838; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background-color: #004d2c; }
+    .back-link { display: block; text-align: center; margin-top: 2em; }
   </style>
 </head>
 <body>
   <h2>Formulário de Denúncia Anônima</h2>
   <form id="denunciaForm">
-    <label for="tipo">Tipo de Denúncia</label>
-    <select id="tipo" required>
+    <label for="categoria">Categoria:</label>
+    <select id="categoria" required>
+      <option value="">Selecione</option>
       <option value="Assédio Moral">Assédio Moral</option>
       <option value="Assédio Sexual">Assédio Sexual</option>
       <option value="Discriminação">Discriminação</option>
-      <option value="Corrupção/Fraude/Suborno">Corrupção/Fraude/Suborno</option>
+      <option value="Corrupção">Corrupção</option>
+      <option value="Fraude/Suborno">Fraude/Suborno</option>
       <option value="Desvio de Conduta Ética">Desvio de Conduta Ética</option>
-      <option value="Irregularidades Trabalhistas">Irregularidades Trabalhistas</option>
-      <option value="Irregularidades Operacionais">Irregularidades Operacionais</option>
-      <option value="Descumprimento de Normas Internas">Descumprimento de Normas Internas</option>
+      <option value="Irregularidade Trabalhista">Irregularidade Trabalhista</option>
+      <option value="Descumprimento de Normas">Descumprimento de Normas</option>
     </select>
-    <label for="descricao">Descrição</label>
+
+    <label for="descricao">Descrição da Denúncia:</label>
     <textarea id="descricao" rows="6" required></textarea>
+
     <button type="submit">Enviar Denúncia</button>
   </form>
-  <p id="protocolo" style="text-align:center; font-weight: bold;"></p>
+  <div class="back-link">
+    <a href="index.html">← Voltar para a Página Principal</a>
+  </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyC8RVKSDOmu6477Du27zYrm-QzAXaBqlf0",
-      authDomain: "racrsambiental-denuncias.firebaseapp.com",
-      databaseURL: "https://racrsambiental-denuncias-default-rtdb.firebaseio.com",
-      projectId: "racrsambiental-denuncias",
-      storageBucket: "racrsambiental-denuncias.appspot.com",
-      messagingSenderId: "162450672732",
-      appId: "1:162450672732:web:487a30fb39f1a756c22a99",
-      measurementId: "G-S7D6P3472F"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    document.getElementById("denunciaForm").addEventListener("submit", function(e) {
+  <script>
+    document.getElementById('denunciaForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const tipo = document.getElementById("tipo").value;
-      const descricao = document.getElementById("descricao").value;
-      const timestamp = Date.now().toString();
-      push(ref(db, "denuncias"), { tipo, descricao, timestamp }).then(ref => {
-        document.getElementById("protocolo").innerText = "Protocolo: " + ref.key;
-        document.getElementById("denunciaForm").reset();
-      });
+      alert("Denúncia enviada com sucesso! Protocolo: " + Math.random().toString(36).substring(2, 10).toUpperCase());
+      this.reset();
     });
   </script>
 </body>
